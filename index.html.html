@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ocean State Hot Wieners | Food Truck</title>
+    <meta name="description" content="Catch Ocean State Hot Wieners serving the best street food in town. View our menu, live schedule, and contact us for catering.">
+    
+    <!-- Google Fonts for typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&family=Lobster&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                        brand: ['Lobster', 'cursive'],
+                        accent: ['Anton', 'sans-serif'],
+                    },
+                    colors: {
+                        eastern: '#24a7ac',   // Primary branding, buttons, links
+                        kidnapper: '#eef2e6', // Main background, soft clean look
+                        tiber: '#052536',     // Deep dark blue, main text, footer
+                        zorba: '#989491',     // Grayish tone, secondary text, borders
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for specific needs not easily handled by utility classes */
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Mobile menu toggle logic */
+        #mobile-menu {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        #mobile-menu.open {
+            max-height: 400px;
+            opacity: 1;
+        }
+        
+        /* Aspect ratio hack for calendar iframe */
+        .calendar-wrapper {
+            position: relative;
+            padding-bottom: 75%; /* 4:3 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            background-color: #eef2e6; /* kidnapper */
+        }
+        .calendar-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        @media (min-width: 768px) {
+            .calendar-wrapper {
+                padding-bottom: 56.25%; /* 16:9 Aspect Ratio on larger screens */
+            }
+        }
+    </style>
+</head>
+<body class="bg-kidnapper text-tiber font-sans">
+
+    <header class="sticky top-0 z-50 bg-kidnapper/95 backdrop-blur shadow-sm border-b border-zorba/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo Area -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="font-brand text-2xl sm:text-3xl text-eastern tracking-normal">
+                        Ocean State <span class="text-tiber">Hot Wieners</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Nav -->
+                <nav aria-label="Main Navigation" class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-tiber hover:text-eastern font-medium px-3 py-2 transition-colors">Home</a>
+                    <a href="#menu" class="text-tiber hover:text-eastern font-medium px-3 py-2 transition-colors">Menu</a>
+                    <a href="#schedule" class="text-tiber hover:text-eastern font-medium px-3 py-2 transition-colors">Schedule</a>
+                    <a href="#about" class="text-tiber hover:text-eastern font-medium px-3 py-2 transition-colors">About Us</a>
+                    <a href="#contact" class="text-tiber hover:text-eastern font-medium px-3 py-2 transition-colors">Contact</a>
+                </nav>
+
+                <!-- Mobile menu button -->
+                <div class="flex md:hidden items-center">
+                    <button type="button" id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-tiber hover:text-eastern hover:bg-zorba/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-eastern" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div class="md:hidden bg-kidnapper border-b border-zorba/30" id="mobile-menu">
+            <nav aria-label="Mobile Navigation" class="px-2 pt-2 pb-4 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-3 rounded-md text-base font-medium text-tiber hover:text-eastern hover:bg-zorba/10">Home</a>
+                <a href="#menu" class="block px-3 py-3 rounded-md text-base font-medium text-tiber hover:text-eastern hover:bg-zorba/10">Menu</a>
+                <a href="#schedule" class="block px-3 py-3 rounded-md text-base font-medium text-tiber hover:text-eastern hover:bg-zorba/10">Schedule</a>
+                <a href="#about" class="block px-3 py-3 rounded-md text-base font-medium text-tiber hover:text-eastern hover:bg-zorba/10">About Us</a>
+                <a href="#contact" class="block px-3 py-3 rounded-md text-base font-medium text-tiber hover:text-eastern hover:bg-zorba/10">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="relative bg-tiber min-h-[85vh] flex items-center" aria-labelledby="hero-heading">
+            <!-- Background Image -->
+            <div class="absolute inset-0 overflow-hidden">
+                <img src="https://placehold.co/1920x1080/052536/eef2e6?text=%20" alt="Our food truck serving customers" class="w-full h-full object-cover object-center opacity-30">
+            </div>
+            
+            <!-- Hero Content -->
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center lg:text-left">
+                <div class="max-w-3xl">
+                    <span class="block text-eastern font-accent tracking-wide text-2xl sm:text-3xl mb-4">Always hot, Always Fresh.</span>
+                    <h1 id="hero-heading" class="text-6xl font-brand text-kidnapper sm:text-7xl md:text-8xl mb-6">
+                        Ocean State <span class="text-eastern">Hot Wieners</span>
+                    </h1>
+                    <p class="mt-3 text-lg text-kidnapper/80 sm:text-xl md:mt-5 mb-10 max-w-2xl mx-auto lg:mx-0">
+                        Serving up bold flavors and hearty portions out of our custom kitchen on wheels. 
+                        
+                        Grab a classic hot wiener Served all the way!.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#schedule" class="w-full sm:w-auto flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-full text-white bg-eastern hover:bg-eastern/80 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+                            Find Us Today
+                        </a>
+                        <a href="#menu" class="w-full sm:w-auto flex items-center justify-center px-8 py-4 border-2 border-kidnapper text-base font-medium rounded-full text-kidnapper hover:bg-kidnapper hover:text-tiber transition-all duration-200">
+                            View Menu
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="menu" class="py-24 bg-white" aria-labelledby="menu-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 id="menu-heading" class="text-base text-eastern font-semibold tracking-wide uppercase">Handcrafted By The Wiener Man</h2>
+                    <p class="mt-2 text-4xl leading-8 font-display font-extrabold tracking-tight text-tiber sm:text-5xl">Our Signature Menu</p>
+                    <p class="mt-4 max-w-2xl text-xl text-zorba mx-auto">The Rhode Island staples you know and love, made fresh daily.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-x-8 gap-y-12">
+                    <!-- Menu Item 1 -->
+                    <article class="flex flex-col sm:flex-row gap-6 p-6 rounded-2xl bg-kidnapper/50 hover:bg-kidnapper hover:shadow-lg border border-zorba/20 transition-all duration-300">
+                        <div class="flex-shrink-0">
+                            <img class="h-32 w-32 object-cover rounded-xl shadow-sm" src="https://placehold.co/300x300/24a7ac/eef2e6?text=Hot+Wiener" alt="Classic Hot Wiener ">
+                        </div>
+                        <div class="flex-1 flex flex-col justify-center">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold text-tiber font-display">The Classic Hot Wiener</h3>
+                                <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-bold bg-eastern text-white">$0</span>
+                            </div>
+                            <p class="text-tiber/80 text-sm">Topped with meat sauce, mustard, chopped onions, and celery salt on a steamed bun. "All the way!"</p>
+                        </div>
+                    </article>
+
+                    <!-- Menu Item 2 -->
+                    <article class="flex flex-col sm:flex-row gap-6 p-6 rounded-2xl bg-kidnapper/50 hover:bg-kidnapper hover:shadow-lg border border-zorba/20 transition-all duration-300">
+                        <div class="flex-shrink-0">
+                            <img class="h-32 w-32 object-cover rounded-xl shadow-sm" src="https://placehold.co/300x300/052536/eef2e6?text=Chili+Fries" alt="Chili Cheese Fries">
+                        </div>
+                        <div class="flex-1 flex flex-col justify-center">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold text-tiber font-display">Loaded Chili Fries</h3>
+                                <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-bold bg-eastern text-white">$0</span>
+                            </div>
+                            <p class="text-tiber/80 text-sm">Crispy golden fries smothered in our homemade, slow-cooked meat sauce and melted cheese.</p>
+                        </div>
+                    </article>
+
+                    <!-- Menu Item 3 -->
+                    <article class="flex flex-col sm:flex-row gap-6 p-6 rounded-2xl bg-kidnapper/50 hover:bg-kidnapper hover:shadow-lg border border-zorba/20 transition-all duration-300">
+                        <div class="flex-shrink-0">
+                            <img class="h-32 w-32 object-cover rounded-xl shadow-sm" src="https://placehold.co/300x300/989491/eef2e6?text=Plain+Wiener" alt="Plain Wiener">
+                        </div>
+                        <div class="flex-1 flex flex-col justify-center">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold text-tiber font-display">Plain Wiener</h3>
+                                <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-bold bg-eastern text-white">$0</span>
+                            </div>
+                            <p class="text-tiber/80 text-sm"> Just the wiener on a steamed bun.</p>
+                        </div>
+                    </article>
+
+                    <!-- Menu Item 4 -->
+                    <article class="flex flex-col sm:flex-row gap-6 p-6 rounded-2xl bg-kidnapper/50 hover:bg-kidnapper hover:shadow-lg border border-zorba/20 transition-all duration-300">
+                        <div class="flex-shrink-0">
+                            <img class="h-32 w-32 object-cover rounded-xl shadow-sm" src="https://placehold.co/300x300/24a7ac/052536?text=Assorted+Soda" alt="Assorted Soda">
+                        </div>
+                        <div class="flex-1 flex flex-col justify-center">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold text-tiber font-display">Soda</h3>
+                                <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-bold bg-eastern text-white">$0</span>
+                            </div>
+                            <p class="text-tiber/80 text-sm">menu item description.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="schedule" class="py-24 bg-tiber relative overflow-hidden" aria-labelledby="schedule-heading">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-12">
+                    <h2 id="schedule-heading" class="text-base text-eastern font-semibold tracking-wide uppercase">Live Locations</h2>
+                    <p class="mt-2 text-4xl leading-8 font-display font-extrabold tracking-tight text-kidnapper sm:text-5xl">Where to Find Us</p>
+                    <p class="mt-4 max-w-2xl text-xl text-kidnapper/70 mx-auto">Check the calendar below for our exact parking spots and hours.</p>
+                </div>
+
+                <div class="bg-kidnapper p-2 sm:p-4 rounded-2xl shadow-2xl">
+                    <div class="calendar-wrapper flex items-center justify-center">
+                        <!-- REAL IMPLEMENTATION: Replace the div below with the iframe code from Google Calendar -->
+                        <div class="absolute inset-0 flex flex-col items-center justify-center text-zorba text-center p-6 border-4 border-dashed border-zorba/40 rounded-xl m-2">
+                            <svg class="mx-auto h-12 w-12 text-zorba mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            <span class="block text-lg font-medium text-tiber font-display">Google Calendar Embed Goes Here</span>
+                            <span class="block mt-1 text-sm">Paste your public calendar iframe code to instantly sync live locations.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-24 bg-kidnapper" aria-labelledby="about-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+                    <div class="mb-12 lg:mb-0">
+                        <img src="https://placehold.co/800x1000/052536/eef2e6?text=The+Wiener+Man" alt="Meet The Team" class="rounded-3xl shadow-xl w-full object-cover">
+                    </div>
+                    <div>
+                        <h2 id="about-heading" class="text-base text-eastern font-semibold tracking-wide uppercase">Our Story</h2>
+                        <p class="mt-2 text-4xl leading-8 font-display font-extrabold tracking-tight text-tiber sm:text-5xl mb-6">A Rhode Island Tradition.</p>
+                        
+                        <div class="space-y-6 text-lg text-tiber/80">
+                            <p>
+                                What started as neighborhood cookouts quickly turned into the city's worst-kept secret. Ocean State Hot Wieners was born out of our passion for cooking authentic local street food and honoring the great Rhode Island tradition.
+                            </p>
+                            <p>
+                                We don't believe in shortcuts. We source our ingredients locally, and slow-cook our meat sauce using a closely guarded family recipe. It's a labor of love, and you can taste it in every bite.
+                            </p>
+                            <p class="font-medium text-tiber border-l-4 border-eastern pl-4">
+                                "Always Hot, Always Fresh, Served All The Way" <br>
+                                <span class="text-eastern text-sm font-bold tracking-wider uppercase block mt-2">— The Wiener Man</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-24 bg-white" aria-labelledby="contact-heading">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 id="contact-heading" class="text-base text-eastern font-semibold tracking-wide uppercase">Get in Touch</h2>
+                <p class="mt-2 text-4xl leading-8 font-display font-extrabold tracking-tight text-tiber sm:text-5xl mb-12">Book Us For Events and Catering</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Email -->
+                    <div class="bg-kidnapper/50 border border-zorba/20 rounded-2xl p-8 hover:shadow-lg transition-shadow">
+                        <div class="w-12 h-12 mx-auto bg-eastern/20 rounded-full flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-eastern" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-tiber mb-2">Email Us</h3>
+                        <a href="mailto:hello@oceanstatewieners.com" class="text-eastern hover:text-tiber font-medium break-all">info@oceanstatewieners.com</a>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="bg-kidnapper/50 border border-zorba/20 rounded-2xl p-8 hover:shadow-lg transition-shadow">
+                        <div class="w-12 h-12 mx-auto bg-eastern/20 rounded-full flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-eastern" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-tiber mb-2">Call Us</h3>
+                        <a href="tel:+15551234567" class="text-eastern hover:text-tiber font-medium">(555) 123-4567</a>
+                    </div>
+
+                    <!-- Social -->
+                    <div class="bg-kidnapper/50 border border-zorba/20 rounded-2xl p-8 hover:shadow-lg transition-shadow">
+                        <div class="w-12 h-12 mx-auto bg-eastern/20 rounded-full flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-eastern" fill="currentColor" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-tiber mb-2">Follow Us</h3>
+                        <a href="#" class="text-eastern hover:text-tiber font-medium">@OceanStateWieners</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-tiber py-12 border-t border-zorba/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <span class="font-brand text-2xl text-kidnapper tracking-normal">Ocean State<span class="text-eastern"> Hot Wieners</span></span>
+            </div>
+            <div class="text-zorba text-sm text-center md:text-left">
+                &copy; <span id="year"></span> Ocean State Hot Wieners. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script for mobile menu toggle and dynamic year -->
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle Logic
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', !isExpanded);
+            menu.classList.toggle('open');
+        });
+
+        // Close mobile menu when clicking a link
+        const mobileLinks = menu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                btn.setAttribute('aria-expanded', 'false');
+                menu.classList.remove('open');
+            });
+        });
+    </script>
+</body>
+</html>
